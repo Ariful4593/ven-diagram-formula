@@ -1,11 +1,3 @@
-const arif = [
-    {id: 1, name: 'Ariful Islam', roll: 171966, dept: 'Computer'},
-    {id: 2, name: 'Shoriful Islam', roll: 171967, dept: 'Civil'},
-    {id: 3, name: 'Karimul Islam', roll: 171968, dept: 'Civil'},
-    {id: 4, name: 'Selim Islam', roll: 171969, dept: 'Textile'},
-];
-
-
 const normalPerson = {
     firstName: "Ariful",
     lastName: "Islam",
