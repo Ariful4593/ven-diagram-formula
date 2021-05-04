@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <style>
+        #bank_form {
+            margin: 100px;
+        }
+
+        .main_form {
+            margin: 30px 20px 30px 20px;
+        }
+        #transaction-area{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-center">Welcome to Pioneer Bank</h1>
+    <div id="bank_form" class="alert alert-dark ">
+        <form class="main_form" id="main_form">
+            <h2>Login</h2>
+            <input type="text" class="w-100 form-control" placeholder="Email" name="" id=""><br>
+            <input type="text" class="w-100 form-control" placeholder="Password" name="" id=""><br>
+            <input type="submit" class="btn btn-success" id="login_btn" value="Login">
+        </form>
+
+        <div id="transaction-area">
+            <div class="card-deck">
+                <div class="card" style="background-color: slateblue">
+                    <div class="card-body">
+                        <h5 class="card-title">Deposit</h5>
+                        <h2>$ <span id="deposit_money">00</span></h2>
+                    </div>
+                </div>
+                <div class="card" style="background-color: lightsalmon">
+                    <div class="card-body">
+                        <h5 class="card-title">Withdraw</h5>
+                        <h2>$ <span id="withdraw_money">00</span></h2>
+                    </div>
+                </div>
+                <div class="card" style="background-color: orange">
+                    <div class="card-body">
+                        <h5 class="card-title">Balance</h5>
+                        <h2>$ <span id="current_balance">00</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-deck mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deposit</h5>
+                        <input type="text" class="w-100 form-control" placeholder="Enter deposit balance" name=""
+                            id="deposit-balance"><br>
+                        <input type="submit" class="btn btn-success" id="deposit-btn" value="Deposit">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Withdraw</h5>
+                        <input type="text" class="w-100 form-control" placeholder="Enter withdraw balance" name=""
+                            id="withdraw-balance"><br>
+                        <input type="submit" class="btn btn-success" id="withdraw-btn" value="Withdraw">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+    </div>
+
+    <script>
+        const login_btn = document.getElementById("login_btn");
+        login_btn.addEventListener("click", (e) => {
+            document.getElementById("main_form").style.display = "none";
+            document.getElementById("transaction-area").style.display = "block";
+            e.preventDefault();
+        })
+
+        const deposit_btn = document.getElementById("deposit-btn");
+        deposit_btn.addEventListener("click", () => {
+            const deposit_balance = getInputNumber("deposit-balance");
+            updateSpanText("deposit_money", deposit_balance);
+            updateSpanText("current_balance", deposit_balance);
+
+            document.getElementById("deposit-balance").value = "";
+
+        })
+
+        const withdraw_btn = document.getElementById("withdraw-btn");
+        withdraw_btn.addEventListener("click", () => {
+            const withdraw_balance = getInputNumber("withdraw-balance");
+
+            updateSpanText("withdraw_money", withdraw_balance);
+            updateSpanText("current_balance", -1 * withdraw_balance);
+        })
+        const getInputNumber = (id) => {
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+        const updateSpanText = (id, addedNumber) => {
+            const current = document.getElementById(id).innerText;
+            const current_number = parseFloat(current);
+            const totalAmount = addedNumber + current_number;
+            document.getElementById(id).innerText = totalAmount;
+        }
+    </script>
+</body>
+
+
+</html>
